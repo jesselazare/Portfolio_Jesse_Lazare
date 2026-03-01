@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -12,15 +7,95 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* On réinitialise proprement */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  /* Application du dégradé fixe sur tout le body */
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #7dd3fc 50%,
+    #1e40af 75%,
+    #000000 100%
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Texte adaptatif : Blanc sur fond sombre, Noir sur fond clair */
+.text-adaptive {
+  color: white !important; /* Couleur de base pour le calcul */
+  mix-blend-mode: difference;
+  /* Optionnel : adoucir un peu le rendu */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 2s ease-in-out forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 2s ease-out forwards;
+}
+
+/* Typographies */
+p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+h1 {
+  font-size: clamp(2rem, 8vw, 4rem); /* Taille fluide */
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+section {
+  padding: 40px 20px;
+  display: block;
+}
+
+button {
+  background-color: #1e40af;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: opacity 0.2s;
+}
+
+button:hover {
+  opacity: 0.9;
 }
